@@ -34,9 +34,52 @@ class GameData {
 
 }
 
+let oGameData = new GameData();
 
+window.addEventListener('load', () => {
 
+  document.addEventListener('keydown', (event) => {
 
+    if(event.key === 'b' || event.key === 'B') {
+      // Programstart
 
+      if(oGameData.timerId !== 0) {
 
+        clearInterval(oGameData.timerId);
+      }
 
+      oGameData.GameBegin = Date.now();
+
+      oGameData.timerId = setInterval( () => {
+
+        let imgRef = document.createElement('img');
+        let left = oGameData.calculateGhostLeft()
+        let top = oGameData.calculateGhostTop();
+
+        imgRef.setAttribute('src', oGameData.imgSrc);
+        imgRef.setAttribute('alt', oGameData.imgAlt);
+        imgRef.style.top = top + 'px';
+        imgRef.style.left = left + 'px';
+
+        document.querySelector('#gameField').appendChild(imgRef);
+        oGameData.antalSpoken++;
+
+        imgRef.addEventListener('mouseenter', (event) => {
+
+          event.target.remove();
+          oGameData.antalKlickadSpoken++;
+        });
+      }, 1000);
+    } if(event.key === 'e' || event.key ==='E') {
+        // Programslut
+
+        oGameData.GameEnd = Date.now();
+        clearInterval(oGameData.timerId);
+
+        alert(`Antal spöken var: ${oGameData.antalSpoken} och antal fångade spöken var: ${oGameData.antalKlickadSpoken}`);
+
+        oGameData.prepareForNewGame();
+        oGameData.removeGhosts(document.querySelectorAll('#gameField img'));
+    }
+  });
+});
