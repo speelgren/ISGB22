@@ -1,0 +1,1 @@
+I denna katalog finns JS-script för webbapplikationen.
