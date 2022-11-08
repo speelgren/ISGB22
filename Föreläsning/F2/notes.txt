@@ -1,0 +1,24 @@
+https://reactjs.org/tutorial/tutorial.html
+
+Några egenskaper (och fördelar) med React
+
+* Single Page Application (SPA)
+* Virtuell DOM
+* XML-liknande syntax (JSX)
+* Stödjer senare versioner av ES
+* Stödjer tillägg (jmf. Node).
+
+Skapa ett React-projekt
+npx create-react-app <projektnamn>
+npm start
+
+Filändelse
+.jsx vid blandning av js och react i en fil.
+.js om endast js
+
+UIRoot.jsx
+return (); kan endast returnera ett <></>. Nestla därför i ett <></> element.
+
+main.jsx
+this.props hämtar inkommande värden från UIRoot <Main c='100' d='200'/>
+c='100' och d='200' är värden som skickas till klassen Main.
