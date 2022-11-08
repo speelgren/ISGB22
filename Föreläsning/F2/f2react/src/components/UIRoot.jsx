@@ -7,10 +7,13 @@ class UIRoot extends Component {
 
   render() {
 
+    let data = { a : 5, b : 10, c : 15, d : 20 };
+
+
     return (
       <>
         <Header />
-        <Main c='100' d ='200'/>
+        <Main {...data}/>
         <Footer />
       </>
     );

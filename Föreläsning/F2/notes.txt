@@ -17,8 +17,11 @@ Filändelse
 .js om endast js
 
 UIRoot.jsx
-return (); kan endast returnera ett <></>. Nestla därför i ett <></> element.
+return (); kan endast returnera ett <></>. Nästla därför i ett <> </> element.
 
 main.jsx
 this.props hämtar inkommande värden från UIRoot <Main c='100' d='200'/>
 c='100' och d='200' är värden som skickas till klassen Main.
+
+Spread operator syntax: ...
+Se return Main UIRoot.jsx
