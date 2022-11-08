@@ -4,10 +4,11 @@ class Header extends Component {
 
   render() {
 
-    let a = 10;
-    let b = 20;
-
-    return ( <header></header> );
+    return (
+      <header>
+        <h1>Pokémon API</h1>
+        <p>Pokémon API med React.</p>
+      </header> );
   }
 }
 

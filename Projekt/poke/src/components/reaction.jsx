@@ -4,7 +4,16 @@ class Reaction extends Component {
 
   render() {
 
-    return (<div></div>);
+    fetch()
+
+    return (
+
+      <div>
+        <img alt='Pokémon' src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png'/>
+        <p>1. Bulbasaur</p>
+        <p></p>
+      </div>
+    );
   }
 }
 
