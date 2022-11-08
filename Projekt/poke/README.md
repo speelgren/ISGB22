@@ -1,3 +1,7 @@
+## PokeAPI med React
+
+Ännu ett Pokémon-projekt. Se det andra under /ISGB13
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
