@@ -64,7 +64,7 @@ class ReactionContainer extends Component {
 
             this.state.dummyList.map((item, index) => {
 
-              return <Reaction key={index} name={item.name} image={item.image + '/' + item.id + '.png'}/>
+              return <Reaction key={index} name={item.name} id={item.id} image={item.image + '/' + item.id + '.png'}/>
             })
           )
         }
