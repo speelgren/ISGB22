@@ -4,14 +4,15 @@ class Reaction extends Component {
 
   render() {
 
-    fetch()
+    let {id, name, image} = this.props;
 
     return (
 
-      <div>
-        <img alt='Pokémon' src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png'/>
-        <p>1. Bulbasaur</p>
-        <p></p>
+      <div className='pokemon-card'>
+        <img className ='pokemon-card-image' alt='Pokémon' src={image} />
+        <p className='pokemon-card-id'>#{id}</p>
+        <p className='pokemon-card-name'>{name}</p>
+        <a href='#' className='pokemon-card-view'>View></a>
       </div>
     );
   }

@@ -9,10 +9,12 @@ class UIRoot extends Component {
 
   render() {
     return (
-      
+
       <>
         <Header />
         <ReactionContainer />
+        <Main />
+        <Footer />
       </>
     );
   }
