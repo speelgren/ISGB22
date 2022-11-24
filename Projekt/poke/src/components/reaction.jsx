@@ -9,11 +9,10 @@ class Reaction extends Component {
 
     return (
 
-      <div className='pokemon-card'>
-        <img className ='pokemon-card-image' alt='Pokémon' src={image} />
-        <p className='pokemon-card-id'>#{id}</p>
-        <p className='pokemon-card-name'>{name}</p>
-        <Link to={'/view/' + id} className='pokemon-card-view' >View</Link>
+      <div className='container-fluid mt-3 mb-3'>
+        <img className ='card' alt='Pokémon' src={image} />
+            <p className='card-text'>#{id} {name}</p>
+            <Link to={'/view/' + id} className='btn btn-primary'>View</Link>
       </div>
     );
   }

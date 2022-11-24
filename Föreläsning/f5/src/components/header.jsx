@@ -4,13 +4,15 @@ class Header extends Component {
 
   render() {
 
-    return (
+    return(
 
       <header className='jumbotron text-center'>
-        <h1>Pokémon API</h1>
-        <p>Pokémon API med React.</p>
-      </header> );
+        <h1>Göööögeletranslate</h1>
+        <p>Använd mä, år äls.</p>
+      </header>
+    );
   }
+
 }
 
 export default Header;

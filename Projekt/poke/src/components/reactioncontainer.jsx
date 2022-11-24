@@ -7,52 +7,29 @@ class ReactionContainer extends Component {
     super();
 
     this.state = {
-      pokeList: Array()
+      pokeList: this.props.list
     }
 
-    this.setDummy();
-  }
-
-  setDummy() {
-
-    this.state.pokeList = [
-      {
-        "id": 1,
-        "name": "Bulbasaur",
-        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon"
-      },
-      {
-        "id": 2,
-        "name": "Ivysaur",
-        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon"
-      },
-      {
-        "id": 3,
-        "name": "Venosaur",
-        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon"
-      }
-    ]
-
-    this.state.dummyList = this.state.pokeList;
+    this.defaultlist = this.state.list;
   }
 
   filter = (e) => {
 
     let text = e.target.value.toLowerCase();
     let pokemons = this.state.pokeList;
+    let search = pokemons.filter( (p) => p.name.toLowerCase().includes(text))
 
-    let search = pokemons.filter(p => p.name.toLowerCase().includes(text))
+    if(text.lengt <= 0 || text == '') {
 
-    this.setState({
-      dummyList: search
-    })
+      this.setState({pokeList : this.defaultlist});
+    }
   }
 
   render() {
 
     return (
-      <div className='pokemon-container'>
-        <h1 className='pokemon-title'>Pokémon list</h1>
+      <div className='container-fluid'>
+        <h1 className='title'>Pokémon List</h1>
         <div>
           <input type='text' onChange={this.filter} />
         </div>
@@ -62,7 +39,7 @@ class ReactionContainer extends Component {
             <h2>No Pokemon found</h2>
           ) : (
 
-            this.state.dummyList.map((item, index) => {
+            this.state.dummyList.map( (item, index) => {
 
               return <Reaction key={index} name={item.name} id={item.id} image={item.image + '/' + item.id + '.png'}/>
             })

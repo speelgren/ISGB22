@@ -1,4 +1,3 @@
-import './SingleView.css';
 import React, { Component } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
@@ -19,8 +18,8 @@ class SingleView extends Component {
 
     return (
 
-      <div className='single-view'>
-        <Link className='back-btn' to='/'>Back</Link>
+      <div>
+        <Link className='btn btn-primary' to='/'>Back</Link>
         <h4>ID: {this.props.params.id}</h4>
       </div>
     );
