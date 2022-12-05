@@ -57,10 +57,10 @@ class UIRoot extends Component {
 
       <>
         <Header />
-        <Routes>
-          <Route path='/' element={this.getReactionContainer()} />
-          <Route path='/view/:id' element={<SingleView />} />
-        </Routes>
+          <Routes>
+            <Route path='/' element={this.getReactionContainer()} />
+            <Route path='/view/:id' element={<SingleView />} />
+          </Routes>
         <Main />
         <Footer />
       </>
