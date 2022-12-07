@@ -1,5 +1,4 @@
-# ISGB22
-Utveckling av webbapplikationer
+# ISGB22 | Utveckling av webbapplikationer
 
-Del 1 (klient): React
-Del 2 (server): PHP
+#### Del 1 (klient): React
+#### Del 2 (server): PHP
