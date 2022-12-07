@@ -1,5 +1,5 @@
 # ISGB22
-Utveckling av Webbapplikationer
+Utveckling av webbapplikationer
 
-Del 1 (F1 - F7): React
-Del 2 (F8+): PHP
+Del 1 (klient): React
+Del 2 (server): PHP
