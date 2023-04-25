@@ -1,22 +1,33 @@
 <?php
 
+    session_start();
+    session_regenerate_id(true);
+
     $title = "logga in";
-    $inloggad = "false";
+    $html = "";
 
-    if(isset($_POST["btnLoggaIn"])) {
+    if( isset($_SESSION["inloggad"]) ) {
 
-        try {
+        $inloggad = "true";
+    } else {
 
-            $dataSourceName = "mysql:" . "host=localhost;" . "dbname=cars;" . "charset=utf8";
-            $userName = "myusername";
-            $passWord = "mypassword";
-            $dbhsOptions = array(
+        $inloggad = "false";
+    }
 
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-            );
+    try {
 
-            $dbh = new PDO($dataSourceName, $userName, $passWord, $dbhsOptions);
+        $dataSourceName = "mysql:" . "host=localhost;" . "dbname=cars;" . "charset=utf8";
+        $userName = "myusername";
+        $passWord = "mypassword";
+        $dbhsOptions = array(
+
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        );
+
+        $dbh = new PDO($dataSourceName, $userName, $passWord, $dbhsOptions);
+
+        if(isset($_POST["btnLoggaIn"])) {
 
             $username = $_POST["txtUsername"];
             $password = $_POST["txtPassword"];
@@ -27,8 +38,9 @@
             $stmt = $dbh->prepare($sql);
             $stmt->bindValue(":user", $username);
             $stmt->bindValue(":pass", $password);
-            $stmt->execute();
 
+            $stmt->execute();
+        
             /*
              * Använd alltid parametrar.
              * Detta är sårbart för SQL-injection: 
@@ -41,7 +53,54 @@
 
                 $title="S U P E R  U S E R";
                 $inloggad = "true";
+
+                $_SESSION["inloggad"] = $inloggad;
+                $_SESSION["user"] = $username;
+                //setcookie("inloggad", $inloggad, time() + 3600);
             }
+        }
+
+        $sql = "SELECT * FROM cars ORDER BY farg ASC";
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute();
+
+        while($row = $stmt->fetch()) {
+
+            $html = $html . "<tr><td>" . $row['fabrikat'] . "</td><td>" . $row['modell'] . "</td><td>" . $row['regnr'] . "</td><td style='background-color: " . $row["farg"] . "'>" . $row['farg'] . "<td><a href='" . $_SERVER["PHP_SELF"] "?cmd=delete&id=" . $row["id"] . "'>Ta bort</a></td></tr>";
+        }
+
+        if( $inloggad == "true" ) {
+            if( isset($_POST["addCar"]) ) {
+
+                try {
+
+                    // kontrollera invärden
+                    // kontrollera villkor
+                    // kolla modell
+
+                    $sql = "INSERT INTO cars(fabrikat, modell, regnr, farg) VALUES(:fabrikat, :modell, :regnr, :farg);";
+                    
+                    $stmt = null;
+                    $stmt = $dbh->prepare($sql);
+                    $stmt->bindValue(":fabrikat", $_POST["txtFabrikat"]);
+                    $stmt->bindValue(":modell", $_POST["txtModell"]);
+                    $stmt->bindValue(":regnr", $_POST["txtRegnr"]);
+                    $stmt->bindValue(":farg", $_POST["txtFarg"]);
+                    $stmt->execute();
+                } 
+
+                if( isset($_GET["cmd"])) {
+
+                    if($_GET["cmd"] == "delete") {
+
+                        $sql = "DELETE FROM cars WHERE id=:id";
+                        $stmt = $dbh->prepare($sql);
+                        $stmt->bindValue(":id", $_GET["id"]);
+                        $stmt->execute();
+                    }
+                }
+            }
+        }
             
         } catch ( PDOException $e ) {
 
@@ -52,9 +111,6 @@
             $stmt = null;
             $dbh = null;
         }
-
-        
-    }
 
 ?>
 
@@ -115,6 +171,37 @@
                 </div>
             </nav>
         </header>
+        <main>
+        <?php
+
+            if($inloggad == "true") {
+            
+            ?>
+                <table class="table">
+                    <tr>
+                        <th>Fabrikat</th>
+                        <th>Modell</th>
+                        <th>Regnr</th>
+                        <th>Färg</th>
+                    </tr>
+                    <?php
+                        echo($html);
+                    ?>
+                </table>
+
+                <form method="POST">
+                    Fabrikat: <input class="form-control" type="text" name="txtFabrikat"><br>
+                    Modell: <input class="form-control" type="text" name="txtModell"><br>
+                    Regnr: <input class="form-control" type="text" name="txtRegnr"><br>
+                    Färg: <input class="form-control" type="color" name="txtFarg">
+                    <input type="submit" name="addCar" value="Lägg till bil">
+                </form>
+
+                <?php
+            }
+
+        ?>
+        </main>
 
     <?php
 
